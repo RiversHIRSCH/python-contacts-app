@@ -1,0 +1,5 @@
+INSTALAR DEPENDENCIAS
+pip install flask flask-mysqldb
+
+INICIAR APLICACIÓN
+python App.py
