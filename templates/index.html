@@ -28,6 +28,12 @@
                     <input type="text" name="email" placeholder="email" class="form-control">
                 </div>
                 <div class="form-group">
+                    <input type="text" name="matricula" placeholder="matricula" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="edad" placeholder="edad" class="form-control">
+                </div>
+                <div class="form-group">
                     <button type="submit" class="btn btn-block btn-outline-info">SAVE</button>
                 </div>
             </form>
@@ -41,6 +47,8 @@
                     <td>Phone</td>
                     <td>Email</td>
                     <td>Operations</td>
+                    <td>Matricula</td>
+                    <td>Edad</td>
                 </tr>
             </thead>
             <tbody>
@@ -49,6 +57,8 @@
                     <td>{{ contact.1 }}</td>
                     <td>{{ contact.2 }}</td>
                     <td>{{ contact.3 }}</td>
+                    <td>{{ contact.4 }}</td>
+                    <td>{{ contact.5 }}</td>
                     <td>
                         <a href="/edit/{{ contact.0 }}" class="btn btn-secondary btn-sm">Edit</a>
                         <a href="/delete/{{ contact.0 }}" class="btn btn-danger btn-sm btn-delete">Delete</a>

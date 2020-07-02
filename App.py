@@ -34,13 +34,15 @@ def add_contact():
         fullname = request.form['fullname']
         phone = request.form['phone']
         email = request.form['email']
+        matricula = request.form['matricula']
+        edad = request.form['edad']
 
         # ESTABLECER CONEXION
         cur = mysql.connection.cursor()
 
         # CONSULTA
         cur.execute(
-            'INSERT INTO contacts (fullname, phone, email) VALUES (%s, %s, %s)', (fullname, phone, email))
+            'INSERT INTO contacts (fullname, phone, email, matricula, edad) VALUES (%s, %s, %s, %s, %s)', (fullname, phone, email, matricula, edad))
         
         # EJECUTAR CONSULTA
         mysql.connection.commit()
