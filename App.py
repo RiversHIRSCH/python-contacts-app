@@ -69,17 +69,22 @@ def get_contact(id):
 @app.route('/update/<id>', methods=['POST'])
 def update_contact(id):
     if request.method == 'POST':
-        fullname = request.form['fullname']
-        phone = request.form['phone']
+        #matricula = request.form['matricula']
+        nombre = request.form['nombre']
+        ap = request.form['ap']
+        am = request.form['am']
+        edad = request.form['edad']
         email = request.form['email']
         cur = mysql.connection.cursor()
         cur.execute("""
-            UPDATE contacts
-            SET fullname = %s,
-                phone = %s,
+            UPDATE alumnos
+            SET nombre = %s,
+                ap = %s,
+                am = %s,
+                edad = %s,
                 email = %s
-            WHERE id = %s
-        """, (fullname, phone, email, id))
+            WHERE matricula = %s
+        """, (nombre, ap, am, edad, email, id))
         mysql.connection.commit()
         flash('Contact Updated Successfully')
         return redirect(url_for('Index'))
