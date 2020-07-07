@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'Evidencia'
+app.config['MYSQL_DB'] = 'flaskcontacts'
 mysql = MySQL(app)
 
 
@@ -21,7 +21,7 @@ app.secret_key = 'mysecretkey'
 @app.route('/')
 def Index():
     cur = mysql.connection.cursor()
-    cur.execute('SELECT * FROM alumnos')
+    cur.execute('SELECT * FROM contacts')
     data = cur.fetchall()
     # print(data) # Impresion de la tupla
     return render_template('index.html', contacts=data)
@@ -31,19 +31,18 @@ def Index():
 @app.route('/add_contact', methods=['POST'])
 def add_contact():
     if request.method == 'POST':
-        matricula = request.form['matricula']
-        nombre = request.form['nombre']
-        ap = request.form['ap']
-        am = request.form['am']
-        edad = request.form['edad']
+        fullname = request.form['fullname']
+        phone = request.form['phone']
         email = request.form['email']
+        matricula = request.form['matricula']
+        edad = request.form['edad']
 
         # ESTABLECER CONEXION
         cur = mysql.connection.cursor()
 
         # CONSULTA
         cur.execute(
-            'INSERT INTO alumnos (matricula, nombre, ap, am, edad, email) VALUES (%s, %s, %s, %s, %s, %s)', (matricula, nombre, ap , am, edad, email))
+            'INSERT INTO contacts (fullname, phone, email, matricula, edad) VALUES (%s, %s, %s, %s, %s)', (fullname, phone, email, matricula, edad))
         
         # EJECUTAR CONSULTA
         mysql.connection.commit()
@@ -89,7 +88,7 @@ def update_contact(id):
 @app.route('/delete/<string:id>')
 def delete_contact(id):
     cur = mysql.connection.cursor()
-    cur.execute('DELETE FROM alumnos WHERE matricula={0}'.format(id))
+    cur.execute('DELETE FROM contacts WHERE id={0}'.format(id))
     mysql.connection.commit()
     flash('Contact Removed Successfully')
     return redirect(url_for('Index'))
